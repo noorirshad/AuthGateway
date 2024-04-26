@@ -66,10 +66,10 @@ namespace AuthGateway.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                return BadRequest(new ResponseViewModel { Status = "Error", Message = "The userName is not associated with any account" });
+                return BadRequest(new ResponseViewModel { Status = "Error", Message = "The Email is not associated with any account" });
             }
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
